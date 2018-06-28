@@ -51,7 +51,7 @@ RUN set -ex \
   done
 
 ENV BITCOIN_ABC_VERSION=0.17.2
-ENV BITCOIN_ABC_SHASUM="8baaedfb868fdbbde2a074b6396fb00dec28df35a0f6f29e9995778d3e08535a  bitcoin-abc-${BITCOIN_ABC_VERSION}.tar.gz"
+ENV BITCOIN_ABC_SHASUM="b6617ced60032e43644d60b76d029e689baf403fe9792232cb0fb5239ef0212c  bitcoin-abc-${BITCOIN_ABC_VERSION}.tar.gz"
 ENV BITCOIN_ABC_PREFIX=/opt/bitcoin-abc-${BITCOIN_ABC_VERSION}
 
 RUN wget https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/src/bitcoin-abc-${BITCOIN_ABC_VERSION}.tar.gz
