@@ -40,6 +40,8 @@ RUN apk --no-cache add libtool
 RUN apk --no-cache add linux-headers
 RUN apk --no-cache add protobuf-dev
 RUN apk --no-cache add zeromq-dev
+RUN apk --no-cache add libdb-dev
+
 RUN set -ex \
   && for key in \
     90C8019E36C2E964 \
