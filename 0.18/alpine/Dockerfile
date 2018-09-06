@@ -108,7 +108,7 @@ ENV PATH=${BITCOIN_ABC_PREFIX}/bin:$PATH
 
 COPY --from=bitcoin-abc /opt /opt
 COPY docker-entrypoint.sh /entrypoint.sh
-chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 VOLUME ["/home/bitcoin/.bitcoin"]
 
