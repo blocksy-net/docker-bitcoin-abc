@@ -54,7 +54,7 @@ ENV BITCOIN_ABC_VERSION=0.18.2
 ENV BITCOIN_ABC_SHASUM="22a23415ec5d1e3d5cde8d894b456cfad63fa6178a96d7fa6be4de3e7823e127  bitcoin-abc-${BITCOIN_ABC_VERSION}.tar.gz"
 ENV BITCOIN_ABC_PREFIX=/opt/bitcoin-abc-${BITCOIN_ABC_VERSION}
 
-RUN wget https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/bitcoin-abc-${BITCOIN_ABC_VERSION}.tar.gz
+RUN wget https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/bitcoin-abc-${BITCOIN_ABC_VERSION}-linux.tar.gz
 RUN echo "${BITCOIN_ABC_SHASUM}" | sha256sum -c
 RUN tar -xzf *.tar.gz
 
