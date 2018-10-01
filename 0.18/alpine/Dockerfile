@@ -51,14 +51,14 @@ RUN set -ex \
   done
 
 ENV BITCOIN_ABC_VERSION=0.18.2
-ENV BITCOIN_ABC_SHASUM="22a23415ec5d1e3d5cde8d894b456cfad63fa6178a96d7fa6be4de3e7823e127  bitcoin-abc-${BITCOIN_ABC_VERSION}.tar.gz"
+ENV BITCOIN_ABC_SHASUM="22a23415ec5d1e3d5cde8d894b456cfad63fa6178a96d7fa6be4de3e7823e127  bitcoin-abc-${BITCOIN_ABC_VERSION}-linux.tar.gz"
 ENV BITCOIN_ABC_PREFIX=/opt/bitcoin-abc-${BITCOIN_ABC_VERSION}
 
 RUN wget https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/bitcoin-abc-${BITCOIN_ABC_VERSION}-linux.tar.gz
 RUN echo "${BITCOIN_ABC_SHASUM}" | sha256sum -c
 RUN tar -xzf *.tar.gz
 
-WORKDIR /bitcoin-abc-${BITCOIN_ABC_VERSION}
+WORKDIR /bitcoin-abc-${BITCOIN_ABC_VERSION}-linux
 
 RUN sed -i '/AC_PREREQ/a\AR_FLAGS=cr' src/univalue/configure.ac
 RUN sed -i '/AX_PROG_CC_FOR_BUILD/a\AR_FLAGS=cr' src/secp256k1/configure.ac
