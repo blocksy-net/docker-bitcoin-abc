@@ -11,16 +11,16 @@ RUN apk --no-cache add \
   su-exec
   
 ENV BITCOIN_ABC_VERSION=0.18.2
-ENV BITCOIN_ABC_PREFIX=bitcoin-abc-${BITCOIN_ABC_VERSION}-x86_64-linux-gnu
-ENV BITCOIN_ABC_SHASUM="28d8511789a126aff16e256a03288948f2660c3c8cb0a4c809c5a8618a519a16  {BITCOIN_ABC_PREFIX}.tar.gz"
+ENV BITCOIN_ABC_DIST=bitcoin-abc-${BITCOIN_ABC_VERSION}-x86_64-linux-gnu.tar.gz
+ENV BITCOIN_ABC_SHASUM="28d8511789a126aff16e256a03288948f2660c3c8cb0a4c809c5a8618a519a16  ${BITCOIN_ABC_DIST}"
 ENV BITCOIN_ABC_DATA=/home/bitcoin/.bitcoin
-ENV PATH=/opt/${BITCOIN_ABC_PREFIX}/bin:$PATH
 
-RUN wget https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/{BITCOIN_ABC_PREFIX}.tar.gz
-RUN echo "${BITCOIN_ABC_SHASUM}" | sha256sum -c
-RUN tar -xzf *.tar.gz
+RUN wget -O $BITCOIN_ABC_DIST https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/${BITCOIN_ABC_DIST} \
+&& echo "$BITCOIN_ABC_SHASUM" | sha256sum -c \
+&& tar -xzf $BITCOIN_ABC_DIST -C bitcoin-bin --strip-components=2 --exclude=*-qt \
+&& mv bitcoin-bin/bitcoind bitcoin-bin/bitcoin-cli bitcoin-bin/bitcoin-tx /usr/local/bin/ \
+&& rm -r bitcoin*
 
-COPY --from=bitcoin-abc /opt /opt
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
