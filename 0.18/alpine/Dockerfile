@@ -1,7 +1,8 @@
 FROM alpine:3.8
 
 RUN adduser -S bitcoin
-RUN apk --no-cache add su-exec
+RUN set -ex \
+&& apk --no-cache add su-exec
   
 ENV BITCOIN_ABC_VERSION=0.18.2
 ENV BITCOIN_ABC_DIST=bitcoin-abc-${BITCOIN_ABC_VERSION}-x86_64-linux-gnu.tar.gz
@@ -17,7 +18,11 @@ RUN wget -O $BITCOIN_ABC_DIST https://download.bitcoinabc.org/${BITCOIN_ABC_VERS
 && rm $BITCOIN_ABC_DIST
 
 COPY docker-entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh \
+&& chmod +x /usr/local/bin/bitcoind \
+&& chmod +x /usr/local/bin/bitcoin-cli \
+&& chmod +x /usr/local/bin/bitcoin-tx \
+&& chown -R bitcoin /usr/local/bin
 
 VOLUME ["/home/bitcoin/.bitcoin"]
 
@@ -25,4 +30,4 @@ EXPOSE 8332 8333 18332 18333 18444
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["/usr/local/bin/bitcoind"]
+CMD ["bitcoind"]
