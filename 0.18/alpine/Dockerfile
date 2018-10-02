@@ -17,6 +17,7 @@ ENV BITCOIN_ABC_DATA=/home/bitcoin/.bitcoin
 
 RUN wget -O $BITCOIN_ABC_DIST https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/${BITCOIN_ABC_DIST} \
 && echo "$BITCOIN_ABC_SHASUM" | sha256sum -c \
+&& mkdir bitcoin-bin \
 && tar -xzf $BITCOIN_ABC_DIST -C bitcoin-bin --strip-components=2 --exclude=*-qt \
 && mv bitcoin-bin/bitcoind bitcoin-bin/bitcoin-cli bitcoin-bin/bitcoin-tx /usr/local/bin/ \
 && rm -r bitcoin*
