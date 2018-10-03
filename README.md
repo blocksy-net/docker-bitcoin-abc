@@ -1,11 +1,11 @@
-# uphold/bitcoin-abc
+# symagbrcoste2017/bitcoin-abc
 
 A Bitcoin ABC docker image.
 
 [![uphold/bitcoin-abc][docker-pulls-image]][docker-hub-url] [![uphold/bitcoin-abc][docker-stars-image]][docker-hub-url] [![uphold/bitcoin-abc][docker-size-image]][docker-hub-url] [![uphold/bitcoin-abc][docker-layers-image]][docker-hub-url]
 
 ## Tags
-- `0.18-alpine` ([0.18/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-abc/blob/master/0.18/alpine/Dockerfile))
+- `alpine, 0.18-alpine, 0.18.2-alpine` ([0.18/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-abc/blob/master/0.18/alpine/Dockerfile))
 
 ## What is Bitcoin ABC?
 
