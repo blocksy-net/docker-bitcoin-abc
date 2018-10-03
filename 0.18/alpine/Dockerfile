@@ -1,8 +1,7 @@
 FROM alpine:3.8
 
-RUN adduser -S bitcoin
 RUN set -ex \
-&& apk --no-cache add su-exec
+&& apk --no-cache add wget su-exec
   
 ENV BITCOIN_ABC_VERSION=0.18.2
 ENV BITCOIN_ABC_DIR=bitcoin-abc-${BITCOIN_ABC_VERSION}
@@ -11,11 +10,14 @@ ENV BITCOIN_ABC_SHASUM="28d8511789a126aff16e256a03288948f2660c3c8cb0a4c809c5a861
 ENV BITCOIN_ABC_DATA=/home/bitcoin/.bitcoin
 
 RUN wget -O $BITCOIN_ABC_DIST https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/${BITCOIN_ABC_DIST} \
-&& echo "$BITCOIN_ABC_SHASUM" | sha256sum -c \
-&& tar -xzf $BITCOIN_ABC_DIST --strip-components=2 --exclude=*-qt \
+&& echo "$BITCOIN_ABC_SHASUM" | sha256sum -c
+
+RUN tar -xzf $BITCOIN_ABC_DIST -C /opt --exclude=*-qt \
 && rm $BITCOIN_ABC_DIST
 
-ENV PATH=/${BITCOIN_ABC_DIR}/bin:$PATH
+RUN addgroup -S bitcoin && adduser -S -G bitcoin bitcoin
+
+ENV PATH=/opt/${BITCOIN_ABC_DIR}/bin:$PATH
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
