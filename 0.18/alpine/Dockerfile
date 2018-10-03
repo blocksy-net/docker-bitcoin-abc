@@ -1,7 +1,7 @@
 FROM alpine:3.8
 
 RUN set -ex \
-&& apk --no-cache add wget su-exec
+&& apk --no-cache add su-exec
 
 ENV BITCOIN_ABC_VERSION=0.18.2
 ENV BITCOIN_ABC_DIR=bitcoin-abc-${BITCOIN_ABC_VERSION}
