@@ -1,11 +1,11 @@
-# symagbrcoste2017/bitcoin-abc
+# blocksy-net/docker-bitcoin-abc
 
 A Bitcoin ABC docker image.
 
 [![uphold/bitcoin-abc][docker-pulls-image]][docker-hub-url] [![uphold/bitcoin-abc][docker-stars-image]][docker-hub-url] [![uphold/bitcoin-abc][docker-size-image]][docker-hub-url] [![uphold/bitcoin-abc][docker-layers-image]][docker-hub-url]
 
 ## Tags
-- `alpine, 0.18-alpine, 0.18.2-alpine` ([0.18/alpine/Dockerfile](https://github.com/uphold/docker-bitcoin-abc/blob/master/0.18/alpine/Dockerfile))
+- `alpine, 0.18-alpine, 0.18.2-alpine` ([0.18/alpine/Dockerfile](https://github.com/blocksy-net/docker-bitcoin-abc/blob/master/0.18/alpine/Dockerfile))
 
 ## What is Bitcoin ABC?
 
@@ -18,7 +18,7 @@ Bitcoin ABC is a full node implementation of the [Bitcoin Cash](https://www.bitc
 This image contains the main binaries from the Bitcoin ABC project - `bitcoind`, `bitcoin-cli` and `bitcoin-tx`. It behaves like a binary, so you can pass any arguments to the image and they will be forwarded to the `bitcoind` binary:
 
 ```sh
-❯ docker run --rm -it uphold/bitcoin-abc \
+❯ docker run --rm -it symagbrcoste2017/docker-bitcoin-abc \
   -printtoconsole \
   -regtest=1 \
   -rpcallowip=172.17.0.0/16 \
@@ -29,7 +29,7 @@ This image contains the main binaries from the Bitcoin ABC project - `bitcoind`,
 By default, `bitcoind` will run as user `bitcoin` for security reasons and with its default data dir (`~/.bitcoin/`). If you'd like to customize where `bitcoin-abc` stores its data, you must use the `BITCOIN_ABC_DATA` environment variable. The directory will be automatically created with the correct permissions for the `bitcoin` user and `bitcoin-abc` automatically configured to use it.
 
 ```sh
-❯ docker run --env BITCOIN_ABC_DATA=/var/lib/data --rm -it uphold/bitcoin-abc \
+❯ docker run --env BITCOIN_ABC_DATA=/var/lib/data --rm -it symagbrcoste2017/docker-bitcoin-abc \
   -printtoconsole \
   -regtest=1
 ```
@@ -37,7 +37,7 @@ By default, `bitcoind` will run as user `bitcoin` for security reasons and with 
 You can also mount a directory it in a volume under `/home/bitcoin/.bitcoin` in case you want to access it on the host:
 
 ```sh
-❯ docker run -v ${PWD}/data:/home/bitcoin/.bitcoin -it --rm uphold/bitcoin-abc \
+❯ docker run -v ${PWD}/data:/home/bitcoin/.bitcoin -it --rm symagbrcoste2017/docker-bitcoin-abc \
   -printtoconsole \
   -regtest=1
 ```
@@ -46,7 +46,7 @@ You can optionally create a service using `docker-compose`:
 
 ```yml
 bitcoin-abc:
-  image: uphold/bitcoin-abc
+  image: symagbrcoste2017/docker-bitcoin-abc
   command:
     -printtoconsole
     -regtest=1
@@ -65,7 +65,7 @@ The second option is making a remote procedure call using a username and passwor
 Start by launching the Bitcoin ABC daemon:
 
 ```sh
-❯ docker run --rm --name bitcoin-abc-server -it uphold/bitcoin-abc \
+❯ docker run --rm --name bitcoin-abc-server -it symagbrcoste2017/docker-bitcoin-abc \
   -printtoconsole \
   -regtest=1
 ```
@@ -112,7 +112,7 @@ Now that you have your credentials, you need to start the Bitcoin ABC daemon wit
 Let's opt for the Docker way:
 
 ```sh
-❯ docker run --rm --name bitcoin-abc-server -it uphold/bitcoin-abc \
+❯ docker run --rm --name bitcoin-abc-server -it symagbrcoste2017/docker-bitcoin-abc \
   -printtoconsole \
   -regtest=1 \
   -rpcallowip=172.17.0.0/16 \
@@ -148,17 +148,13 @@ Done!
 
 ## Images
 
-The `uphold/bitcoin-abc` image comes in multiple flavors:
+The `symagbrcoste2017/docker-bitcoin-abc` image comes in multiple flavors:
 
-### `uphold/bitcoin-abc:latest`
+### `symagbrcoste2017/docker-bitcoin-abc:alpine`
 
 Points to the latest release available of Bitcoin ABC. Occasionally pre-release versions will be included.
 
-### `uphold/bitcoin-abc:<version>`
-
-Based on a slim Debian image, targets a specific version branch or release of Bitcoin ABC.
-
-### `uphold/bitcoin-abc:<version>-alpine`
+### `symagbrcoste2017/docker-bitcoin-abc:<version>-alpine`
 
 Based on Alpine Linux with Berkeley DB 4.8 (cross-compatible build), targets a specific version branch or release of Bitcoin ABC.
 
@@ -170,9 +166,9 @@ This image is officially supported on Docker version 17.09.0-ce, with support fo
 
 [License information](https://github.com/Bitcoin-ABC/bitcoin-abc/blob/master/COPYING) for the software contained in this image.
 
-[License information](https://github.com/uphold/docker-bitcoin-abc/blob/master/LICENSE) for the [uphold/docker-bitcoin-abc][docker-hub-url] docker project.
+[License information](https://github.com/blocksy-net/docker-bitcoin-abc/blob/master/LICENSE) for the [symagbrcoste2017/docker-bitcoin-abc][docker-hub-url] docker project.
 
-[docker-hub-url]: https://hub.docker.com/r/uphold/bitcoin-abc
+[docker-hub-url]: https://hub.docker.com/r/symagbrcoste2017/docker-bitcoin-abc
 [docker-layers-image]: https://img.shields.io/imagelayers/layers/uphold/bitcoin-abc/latest.svg?style=flat-square
 [docker-pulls-image]: https://img.shields.io/docker/pulls/uphold/bitcoin-abc.svg?style=flat-square
 [docker-size-image]: https://img.shields.io/imagelayers/image-size/uphold/bitcoin-abc/latest.svg?style=flat-square
