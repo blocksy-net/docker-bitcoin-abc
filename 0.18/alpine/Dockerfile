@@ -13,6 +13,7 @@ RUN wget -O $BITCOIN_ABC_DIST https://download.bitcoinabc.org/${BITCOIN_ABC_VERS
 && echo "$BITCOIN_ABC_SHASUM" | sha256sum -c \
 && tar -xzf $BITCOIN_ABC_DIST \
 && mv ${BITCOIN_ABC_DIR}/bin/bitcoind ${BITCOIN_ABC_DIR}/bin/bitcoin-cli ${BITCOIN_ABC_DIR}/bin/bitcoin-tx /usr/local/bin/ \
+&& mv ${BITCOIN_ABC_DIR}/lib/* /usr/local/lib/ \
 && rm -r $BITCOIN_ABC_DIR \
 && rm $BITCOIN_ABC_DIST \
 && addgroup -S bitcoin && adduser -S -G bitcoin bitcoin
@@ -24,7 +25,6 @@ VOLUME ["/home/bitcoin/.bitcoin"]
 
 EXPOSE 8332 8333 18332 18333 18444
 
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
-#CMD ["bitcoind"]
-CMD ["/bin/sh"]
+CMD ["bitcoind"]
