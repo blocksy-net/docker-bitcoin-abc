@@ -12,12 +12,12 @@ ENV BITCOIN_ABC_DATA=/home/bitcoin/.bitcoin
 RUN wget -O $BITCOIN_ABC_DIST https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/${BITCOIN_ABC_DIST} \
 && echo "$BITCOIN_ABC_SHASUM" | sha256sum -c
 
-RUN tar -xzf $BITCOIN_ABC_DIST -C /opt --exclude=*-qt \
+RUN tar -xzf $BITCOIN_ABC_DIST \
+&& mv ${BITCOIN_ABC_DIR}/bin/bitcoind ${BITCOIN_ABC_DIR}/bin/bitcoin-cli ${BITCOIN_ABC_DIR}/bin/bitcoin-tx /usr/local/bin/
+&& rm -r $BITCOIN_ABC_DIR
 && rm $BITCOIN_ABC_DIST
 
 RUN addgroup -S bitcoin && adduser -S -G bitcoin bitcoin
-
-ENV PATH=/opt/${BITCOIN_ABC_DIR}/bin:$PATH
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
